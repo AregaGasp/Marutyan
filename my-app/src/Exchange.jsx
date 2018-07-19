@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchRatesApi } from './api'
+
 
 export class Exchange extends Component {
         state = {
@@ -7,36 +7,45 @@ export class Exchange extends Component {
             isLoading: false,
             };
 
-
     componentDidMount() {
-      fetchRatesApi();
-      }
-     
-
-  render() {
+        fetch(`https://exchangesos.herokuapp.com/api/all`).then(data => data.json()).then(res =>
+        this.setState({
+          rates: res,
+          isLoading: false,
+        }),
+      )};
+      render() {
+        const { rates } = this.state
+        console.log (rates);
     return (
-      'hello'
-        )
+      <div>
+          <div>
+          <h1 className = {'mainHeader'}>EXCHANGE</h1>
+          </div>
+          {/* <table> */}
+           {/* <tbody>
+                <th>CURRENCY</th>
+                <tr></tr>
+                <th>CURRENCY</th>
+                <tr></tr>
+                </tbody>
+          </table> */}
+          <table>
+           <tbody>
+             <tr>
+                <th>CURRENCY
+                {rates.map((rate,index) => <tr key={index}>{rate.currency}</tr>)}
+                </th>
+                <th>ՎԱՃԱՌՔ We SELL At
+                {rates.map((rate,index) => <tr key={index}>{rate.purchase_price}</tr>)}
+                </th>
+                <th>ԱՌՔ We BUY At
+                {rates.map((rate,index) => <tr key={index}>{rate.sale_price}</tr>)}
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>)
     }
 }
 export default Exchange;
-// class App extends Component {
-//     constructor(props) {
-//       super(props);
-  
-//       this.state = {
-//         hits: [],
-//         isLoading: false,
-//       };
-//     }
-  
-//     componentDidMount() {
-//       this.setState({ isLoading: true });
-  
-//       fetch(API + DEFAULT_QUERY)
-//         .then(response => response.json())
-//         .then(data => this.setState({ hits: data.hits, isLoading: false }));
-//     }
-  
-//     ...
-//   }
