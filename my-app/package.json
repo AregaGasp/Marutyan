@@ -12,6 +12,7 @@
     "react-dom": "^16.4.1",
     "react-moment": "^0.7.9",
     "react-scripts": "1.1.4",
+    "webpack": "^4.16.1",
     "whatwg-fetch": "^2.0.4"
   },
   "scripts": {
@@ -19,5 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "webpack-config": "^7.5.0"
   }
 }
